@@ -1,0 +1,222 @@
+<!-- {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Summarizer</title>
+</head>
+<body>
+    <h1><button>TextSummarizer</button>
+        <button>PdfSummarizer</button></h1>
+
+    <form action="/process-text" method="post">
+        {% csrf_token %}
+        <label for="userInput">Enter Text:</label>
+        <textarea id="userInput" name="user_input" rows="4" cols="50" required></textarea>
+
+        <label for="summarizedOutput">Summarized Output:</label>
+        <textarea id="summarizedOutput" name="summarized_output" rows="4" cols="50" readonly>{{ summarized_output }}</textarea>
+
+        <button type="submit">Summarize</button>
+        
+    </form>
+
+    <button id="microphoneButton">Microphone</button>
+    <button id="translateButton">Translate</button>
+    <form action="welcome" method="post">
+        <button id="logout">logout</button>
+    </form>
+    
+    <script>
+        // Your JavaScript code for microphone and translation buttons
+        document.getElementById('microphoneButton').addEventListener('click', function () {
+            // Add your microphone functionality here
+            alert('Microphone button clicked!');
+        });
+
+        document.getElementById('translateButton').addEventListener('click', function () {
+            // Add your translation functionality here
+            alert('Translate button clicked!');
+        });
+    </script>
+</body>
+</html> -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Summarizer</title>
+    <!-- Add Font Awesome link (make sure to include this in your project) -->
+    <link rel="stylesheet" href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css' %}">
+    <script src="{% static 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js' %}"></script>
+    <script src="{% static 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js' %}"></script>
+    <script src="{% static 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'summarease.css' %}">
+</head>
+<body>
+    <div id="leftPane" class="sidebar" onclick="toggleLeftPane()">
+        
+        <header><h3>SummarEase</h3></header>
+        <ul>
+        <li ><a href="{% url 'ui:summarease' %}"><i class="fas fa-file-alt icon"></i> Text Summarizer</a></li>
+
+        <li><a href="{% url 'ui:pdf1' %}"><i class="fas fa-file-pdf icon"></i> PdfSummarizer</a></li>
+
+        <li><a href="{% url 'ui:grammar' %}"><i class="fas fa-code icon"></i> GrammarChecker</a></li>
+        <li><a href="{% url 'ui:profile' %}" ><i class="fas fa-user icon"></i>Profile</a></li>
+
+        <li></i><a href="{% url 'ui:home' %}" ><i class="fas fa-sign-out-alt icon"></i>Logout</a></li>
+    </ul>
+    </div>            
+   
+</div>
+    <div id="mainButton" onclick="toggleLeftPane()">Main Button</div>
+    <div id="mainContent">
+        <div class="top">
+            <div class="linesContainer">
+                <div >
+                    <p id="minLabel">Short</p>
+                    
+                    <input type="range" id="lineLengthSlider" name="line_length" value="30" min="10" max="100" step="1" list="lineLengthValues">
+                    <datalist id="lineLengthValues">
+                        <option value="10">
+                        <option value="30">
+                        <option value="50">
+                        <option value="100">
+                    </datalist>
+                    <p id="maxLabel">Long</p>
+                    <div id="but">
+                        <button id="deletebutton" title="Delete" onclick="deleteOutput()" style="display: none;"><i class="fas fa-trash-alt larger-icon"></i></button>
+                      <div class="ico"><button id="microphonebutton" title="Microphone"><i class="fas fa-microphone larger-icon"></i></button>
+                        <button id="translatebutton" title="Translate" ><i class="fas fa-language larger-icon"></i></button></div>
+                    </div>
+                </div>
+                
+            </div>
+            </div>
+            <div class="main">
+                <form id="summarizeForm">
+                    {% csrf_token %}
+                    <div class="left">
+                        <textarea ondragstart="return false;" id="inputText" type="text" name="user_input" rows="4" cols="30" required></textarea>
+                        <button id="button">Summarize</button>
+                    </div>
+                </form>
+            
+                <div class="right">
+                    {% if result %}
+                    <div id="output">
+                        <p>{{ result }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        
+        
+        </div>
+    </div>
+        
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#summarizeForm').submit(function (event) {
+                event.preventDefault();
+    
+                // Get the user input from the textarea
+                var userInput = $('#inputText').val();
+    
+                // Send an AJAX request to the Django view
+                $.ajax({
+                    url: '{% url "ui:summarease" %}',
+                    method: 'POST',
+                    data: {
+                        csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+                        user_input: userInput,
+                    },
+                    success: function (data) {
+                        if (data.status === 'success') {
+                            // Display the result in the specified 'div'
+                            $('#output').html('<p>' + data.result + '</p>');
+                        } else {
+                            $('#output').html('<p>Error occurred during summarization.</p>');
+                        }
+                    },
+                    error: function () {
+                        $('#output').html('<p>Error occurred during summarization.</p>');
+                    }
+                });
+            });
+        });
+        function toggleLeftPane() {
+            var leftPane = document.getElementById('leftPane');
+            leftPane.style.left = leftPane.style.left === '0px' ? '-200px' : '0px';
+        }
+        function closeNavbar() {
+            // Close the navbar when an item is clicked
+            $('.navbar-toggle').click();
+        }
+        // Your JavaScript code for microphone, translation, and profile buttons
+        document.getElementById('microphoneButton').addEventListener('click', function () {
+            // Add your microphone functionality here
+            alert('Microphone button clicked!');
+        });
+
+        document.getElementById('translateButton').addEventListener('click', function () {
+            // Add your translation functionality here
+            alert('Translate button clicked!');
+        });
+
+        document.getElementById('profileButton').addEventListener('click', function () {
+            // Add your profile functionality here
+            alert('Profile button clicked!');
+        });
+
+        function resizeTextbox(){
+            const textarea = document.getElementById('userInput');
+            text.style.height = 'auto';
+            text.style.height=(textarea.scrollHeight + 2)+'px';
+
+        }
+        function toggleDropdown() {
+            var dropdown = document.getElementById("profileDropdown");
+            dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+        }
+    
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('#profileButton button')) {
+                var dropdown = document.getElementById("profileDropdown");
+                if (dropdown.style.display === "block") {
+                    dropdown.style.display = "none";
+                }
+            }
+        }
+    
+              <!-- function processText() {
+                var inputText = document.getElementById('inputText').value;
+                var processedText = '' + inputText.toUpperCase();
+                var outputDiv = document.getElementById('output');
+                outputDiv.innerText = processedText;
+          
+                // Show the delete button when there's content in the output
+                var deleteButton = document.getElementById('deletebutton');
+                deleteButton.style.display = outputDiv.innerText.trim() !== '' ? 'inline-block' : 'none';
+              } -->
+          
+              function deleteOutput() {
+                var outputDiv = document.getElementById('output');
+                outputDiv.innerText = '';
+          
+                // Hide the delete button after deleting the content
+                var deleteButton = document.getElementById('deletebutton');
+                deleteButton.style.display = 'none';
+              }
+    </script>
+</body>
+</html>

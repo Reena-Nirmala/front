@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Summarizer</title>
+    <!-- Add Font Awesome link (make sure to include this in your project) -->
+    <link rel="stylesheet" href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'grammar.css' %}">
+</head>
+<body>
+    <div id="leftPane" class="sidebar" onclick="toggleLeftPane()">
+        
+        <header><h3>SummarEase</h3></header>
+        <ul>
+        <li ><a href="{% url 'ui:summarease' %}"><i class="fas fa-file-alt icon"></i> Text Summarizer</a></li>
+
+        <li><a href="{% url 'ui:pdf1' %}"><i class="fas fa-file-pdf icon"></i> PdfSummarizer</a></li>
+
+        <li><a href="{% url 'ui:grammar' %}"><i class="fas fa-code icon"></i> GrammarChecker</a></li>
+        <li><a href="{% url 'ui:profile' %}" ><i class="fas fa-user icon"></i>Profile</a></li>
+
+        <li></i><a href="{% url 'ui:home' %}" ><i class="fas fa-sign-out-alt icon"></i>Logout</a></li>
+    </ul>
+    </div>    
+    
+    <div id="mainContent">
+        
+            <div class="main">
+        <div class="left">
+            <!-- <label for="inputText">Enter Text:</label> -->
+            <textarea ondragstart="return false;" id="inputText" type="text" name="user_input" placeholder="Enter sentences to check and correct" rows="4" cols="30" required style="padding:10px;"></textarea>
+            <!-- <textarea id="userInput" oninput="resizeTextbox()"></textarea> -->
+            <!-- <button type="submit"><i class="fas fa-check"></i> </button> -->
+            <button id="button" onclick="processText()" >Check</button>
+        </div>
+        <!-- <hr style="height: 90%; border: 0; border-left: 1px solid #ed0909; margin: 0 10px;"> -->
+        <div class="right">
+            <!-- <label>Output</label> -->
+                <div id="output" >
+                <!-- <textarea id="output" readonly></textarea> -->
+                </div>
+            <!-- <div id="but" >
+                <button id="microphonebutton" title="Microphone"><i class="fas fa-microphone larger-icon"></i></button>
+                <button id="translatebutton" title="Translate" ><i class="fas fa-language larger-icon"></i></button>
+            </div> -->
+            
+        </div>
+        
+        
+        </div>
+    </div>
+        
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+    <script>
+        // Your JavaScript code for microphone, translation, and profile buttons
+        document.getElementById('microphoneButton').addEventListener('click', function () {
+            // Add your microphone functionality here
+            alert('Microphone button clicked!');
+        });
+
+        document.getElementById('translateButton').addEventListener('click', function () {
+            // Add your translation functionality here
+            alert('Translate button clicked!');
+        });
+
+        document.getElementById('profileButton').addEventListener('click', function () {
+            // Add your profile functionality here
+            alert('Profile button clicked!');
+        });
+
+        function resizeTextbox(){
+            const textarea = document.getElementById('userInput');
+            text.style.height = 'auto';
+            text.style.height=(textarea.scrollHeight + 2)+'px';
+
+        }
+        function toggleDropdown() {
+            var dropdown = document.getElementById("profileDropdown");
+            dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+        }
+    
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('#profileButton button')) {
+                var dropdown = document.getElementById("profileDropdown");
+                if (dropdown.style.display === "block") {
+                    dropdown.style.display = "none";
+                }
+            }
+        }
+    
+            function toggleLeftPane() {
+              const leftPane = document.getElementById('leftPane');
+              leftPane.classList.toggle('hidden');
+            }
+            
+              function processText() {
+                var inputText = document.getElementById('inputText').value;
+                var processedText = '' + inputText.toUpperCase();
+                var outputDiv = document.getElementById('output');
+                outputDiv.innerText = processedText;
+          
+                // Show the delete button when there's content in the output
+                var deleteButton = document.getElementById('deletebutton');
+                deleteButton.style.display = outputDiv.innerText.trim() !== '' ? 'inline-block' : 'none';
+              }
+          
+              function deleteOutput() {
+                var outputDiv = document.getElementById('output');
+                outputDiv.innerText = '';
+          
+                // Hide the delete button after deleting the content
+                var deleteButton = document.getElementById('deletebutton');
+                deleteButton.style.display = 'none';
+              }
+    </script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Summarizer</title>
+    <!-- Add Font Awesome link (make sure to include this in your project) -->
+    <link rel="stylesheet" href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'pdf1.css' %}">
+</head>
+<body style="background-color: rgb(255, 255, 255);">
+    <div id="leftPane" class="sidebar" onclick="toggleLeftPane()" style="background-color: rgb(255, 255, 255);">
+        
+        <header><h3>SummarEase</h3></header>
+        <ul >
+        <li ><a href="{% url 'ui:summarease' %}" ><i class="fas fa-file-alt icon"></i> Text Summarizer</a></li>
+
+        <li><a href="{% url 'ui:pdf1' %}"><i class="fas fa-file-pdf icon"></i> PdfSummarizer</a></li>
+
+        <li><a href="{% url 'ui:grammar' %}"><i class="fas fa-code icon"></i> GrammarChecker</a></li>
+        <li><a href="{% url 'ui:profile' %}" ><i class="fas fa-user icon"></i>Profile</a></li>
+
+        <li></i><a href="{% url 'ui:home' %}" ><i class="fas fa-sign-out-alt icon"></i>Logout</a></li>
+    </ul>
+    </div>    
+    
+    <div id="mainContent">
+        <div class="top">
+            <div class="linesContainer">
+               
+                <div >
+                    <!-- Label for minimum value -->
+                    <p id="minLabel"><b>PDF Summarizer</b></p>
+                
+                    <div id="but">
+                        <button id="deletebutton" title="Delete" onclick="deleteOutput()" style="display: none;"><i class="fas fa-trash-alt larger-icon"></i></button>
+                      <div class="ico"><button id="microphonebutton" title="Microphone"><i class="fas fa-microphone larger-icon"></i></button>
+                        <button id="translatebutton" title="Translate" ><i class="fas fa-language larger-icon"></i></button></div>
+                    </div>
+                </div>
+                
+            </div>
+            </div>
+
+            <div class="main">
+            <div class="left">
+
+                <div id="upload-container">
+                    <label id="custom-upload" for="file-input">
+                        <i class="fas fa-cloud-upload-alt"></i> 
+                        
+                    </label>
+                    <!-- Actual file input (hidden) -->
+                    <p style="color: darkcyan;">Upload PDF</p>
+                    <input type="file" id="file-input" accept=".pdf" />
+                </div>
+                
+                <button id="extract-button" onclick="extractPdfContent()">Extract Content</button>
+
+            </div>
+
+        <!-- <hr style="height: 90%; border: 0; border-left: 1px solid #ed0909; margin: 0 10px;"> -->
+        <div class="right">
+                <div id="output">
+                </div>
+            
+            
+        </div>
+        
+        
+        </div>
+    </div>
+        
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+    <script>
+        // Your JavaScript code for microphone, translation, and profile buttons
+        document.getElementById('microphoneButton').addEventListener('click', function () {
+            // Add your microphone functionality here
+            alert('Microphone button clicked!');
+        });
+
+        document.getElementById('translateButton').addEventListener('click', function () {
+            // Add your translation functionality here
+            alert('Translate button clicked!');
+        });
+
+        document.getElementById('profileButton').addEventListener('click', function () {
+            // Add your profile functionality here
+            alert('Profile button clicked!');
+        });
+
+        function resizeTextbox(){
+            const textarea = document.getElementById('userInput');
+            text.style.height = 'auto';
+            text.style.height=(textarea.scrollHeight + 2)+'px';
+
+        }
+        function toggleDropdown() {
+            var dropdown = document.getElementById("profileDropdown");
+            dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+        }
+    
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('#profileButton button')) {
+                var dropdown = document.getElementById("profileDropdown");
+                if (dropdown.style.display === "block") {
+                    dropdown.style.display = "none";
+                }
+            }
+        }
+    
+            function toggleLeftPane() {
+              const leftPane = document.getElementById('leftPane');
+              leftPane.classList.toggle('hidden');
+            }
+            
+              function processText() {
+                var inputText = document.getElementById('inputText').value;
+                var processedText = '' + inputText.toUpperCase();
+                var outputDiv = document.getElementById('output');
+                outputDiv.innerText = processedText;
+          
+                // Show the delete button when there's content in the output
+                var deleteButton = document.getElementById('deletebutton');
+                deleteButton.style.display = outputDiv.innerText.trim() !== '' ? 'inline-block' : 'none';
+              }
+          
+              function deleteOutput() {
+                var outputDiv = document.getElementById('output');
+                outputDiv.innerText = '';
+          
+                // Hide the delete button after deleting the content
+                var deleteButton = document.getElementById('deletebutton');
+                deleteButton.style.display = 'none';
+              }
+            
+            
+    </script>
+</body>
+</html>

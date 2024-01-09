@@ -1,266 +1,5 @@
-<!-- {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Login</title>
-    <style>
-        /* Your CSS styles here */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
 
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 16px;
-            box-sizing: border-box;
-        }
-
-        button {
-            background-color: #4caf50;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        /* .forgot-password { 
-         text-align: center;
-            margin-top: 10px; */
-         
-    </style>
-</head>
-<body>
-    <form action="summarize" method=post id ="loginForm">
-        {% csrf_token %}
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-
-        <button type="submit" >Login</button>
-        <p> create an account? <a href="registration" id="register">Signup</a></p>
-        <div class="forgot-password">
-            <a href="forgotpassword">Forgot Password?</a>
-        </div>
-    </form>
-     <script>
-        document.getElementById('loginForm').addEventListener('submit', function (event) {
-            // Perform your login logic here (e.g., send data to the server for validation)
-            // For demonstration purposes, I'm using a simple alert as a success message
-            alert('Login successful!'); // You can replace this with a modal or any other UI element
-            event.preventDefault(); // Prevent the form from submitting (for demo purposes)
-        });
-    </script>  
-</body>
-</html> -->
-
-<!-- {% load static %}
-
-<!DOCTYPE html>
-<html lang='en'>
-
-<head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Document</title>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <link rel='stylesheet' href='stylelog.css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
-    }
-    
-    section {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        width: 100%;
-        /* background: url("background.jpg") no-repeat; */
-        background-position: center;
-        background-size: cover;
-    }
-    
-    .form-box {
-        position: relative;
-        width: 400px;
-        height: 450px;
-        background: transparent;
-        border: none;
-        border-radius: 20px;
-        backdrop-filter: blur(15px) brightness(80%);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    h2 {
-        font-size: 2em;
-        color: #fff;
-        text-align: center;
-    }
-    
-    .inputbox {
-        position: relative;
-        margin: 30px 0;
-        width: 310px;
-        border-bottom: 2px solid #fff;
-    }
-    
-    .inputbox label {
-        position: absolute;
-        top: 50%;
-        left: 5px;
-        transform: translateY(-50%);
-        color: #fff;
-        font-size: 1em;
-        pointer-events: none;
-        transition: 0.5s;
-    }
-    
-    /* animations: start */
-    input:focus~label,
-    input:valid~label {
-        top: -5px;
-    }
-    
-    /* animation:end */
-    .inputbox input {
-        width: 100%;
-        height: 50px;
-        background: transparent;
-        border: none;
-        outline: none;
-        font-size: 1em;
-        padding: 0 35px 0 5px;
-        color: #fff;
-    }
-    
-    .inputbox ion-icon {
-        position: absolute;
-        right: 8px;
-        color: #fff;
-        font-size: 1.2em;
-        top: 20px;
-    }
-    
-    .forget {
-        margin: -10px 0 17px;
-        font-size: 0.9em;
-        color: #fff;
-        display: flex;
-        justify-content: space-between;
-    }
-    
-    .forget label input {
-        margin-right: 3px;
-    }
-    
-    .forget a {
-        color: #fff;
-        text-decoration: none;
-    }
-    
-    .forget a:hover {
-        text-decoration: underline;
-    }
-    
-    button {
-        width: 100%;
-        height: 40px;
-        border-radius: 40px;
-        background-color: #fff;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        font-size: 1em;
-        font-weight: 600;
-    }
-    
-    .register {
-        font-size: 0.9em;
-        color: #fff;
-        text-align: center;
-        margin: 25px 0 10px;
-    }
-    
-    .register p a {
-        text-decoration: none;
-        color: #fff;
-        font-weight: 600;
-    }
-    
-    .register p a:hover {
-        text-decoration: underline;
-    }
-    
-    @media screen and (max-width: 480px) {
-        .form-box {
-            width: 100%;
-            border-radius: 0px;
-        }
-    }
-</style>
-<body>
-
-    <body>
-        <section>
-            <div class="form-box">
-                <div class="form-value">
-                    <form>
-                        <h2>Register</h2>
-                        <div class="inputbox"> <ion-icon name="mail-outline"></ion-icon> <input type="email" required>
-                            <label>Email</label>
-                        </div>
-                        <div class="inputbox"> <ion-icon name="lock-closed-outline"></ion-icon> <input type="password"
-                                required> <label>Create Password</label> </div>
-                        <div class="forget"> <label><input type="checkbox">Remember Me</label> <a href="#">Forgot
-                                Password</a>  
-                        </div> 
-                        <form action="summarize">
-                        <button >Log In</button>
-                        </form>
-                        <div class="register">
-                            <p>Sign-Up Through <a href="#" class="fa ">Sign Up</a></p>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </section> 
-    </body>
-</body>
-
-</html> -->
-<html>
+<!-- <html>
     <head> 
         <style>
         /* Importing fonts from Google */
@@ -281,8 +20,11 @@ body {
 .wrapper {
     max-width: 300px;
     min-height: 40px;
+   /* margin-top: 50%;
+    margin-bottom: 50%;
+    margin-left: 10%;
+    margin-right: 10%;*/
     margin: auto;
-    
     padding: 30px 30px 30px 30px;
     background-color: #ecf0f3;
     border-radius: 15px;
@@ -370,19 +112,22 @@ body {
         padding: 40px 15px 15px 15px;
     }
 }
-</style>
+.divi {
+    
 
+}
+</style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     </head>
 <body>
-<div class="wrapper">
-    <div class="logo">
-        <img src="data:image/jpeg;base64,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" alt="">
-    </div>
+    <div class ="position-relative">
+<div class="wrapper" class=”position-absolute top-50 start-50 translate-middle”>
+    
     <div class="text-center mt-4 name">
         <br>
         <h4>SummarEase</h4>
     </div>
-    <form class="p-3 mt-3" action="summarize">
+    <form class="p-3 mt-3" action="summarease">
         <div class="form-field d-flex align-items-center">
             <span class="far fa-user"></span>
             <input type="text" name="userName" id="userName" placeholder="Username">
@@ -399,5 +144,151 @@ body {
         <a href="forgotpassword">Forget password?</a> or <a href="registration">Sign up</a>
     </div>
 </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html> -->
+{% load static %}
+<html>
+    <head> 
+        <style>
+        /* Importing fonts from Google */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+/* Reseting */
+* {
+    
+   
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+}
+
+.wrapper {
+    max-width: 300px;
+    min-height: 40px;
+    margin-left: 38%;
+    margin-top: 6%;
+    padding: 30px 30px 30px 30px;
+    background-color: #ecf0f3;
+    border-radius: 15px;
+    align-content: center;
+    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}
+
+.logo {
+    width: 80px;
+    margin: auto;
+    
+}
+
+.logo img {
+    width: 100%;
+    height: 80px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 3px #5f5f5f,
+        0px 0px 0px 5px #ecf0f3,
+        8px 8px 15px #a7aaa7,
+        -8px -8px 15px #fff;
+}
+
+.wrapper .name {
+    font-weight: 600;
+    font-size: 1.4rem;
+    letter-spacing: 1.3px;
+    color: #555;
+}
+
+.wrapper .form-field input {
+    width: 100%;
+    display: block;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 0.8rem;
+    color: #666;
+    padding: 10px 15px 10px 10px;
+    /* border: 1px solid red; */
+}
+
+.wrapper .form-field {
+    padding-left: 10px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+}
+
+.wrapper .form-field .fas {
+    color: #555;
+}
+
+.wrapper .btn {
+    box-shadow: none;
+    width: 100%;
+    height: 40px;
+    background-image: linear-gradient(to right,rgb(148, 229, 240),rgb(78, 175, 199),rgb(43, 181, 206));
+    color: #fff;
+    border-radius: 25px;
+    box-shadow: 3px 3px 3px #b1b1b1,
+        -3px -3px 3px #fff;
+    letter-spacing: 1.3px;
+    border: 1px solid rgb(0, 217, 255);
+}
+
+.wrapper .btn:hover {
+
+}
+
+.wrapper a {
+    text-decoration: none;
+    font-size: 0.8rem;
+    color: #66320afe;
+}
+
+.wrapper a:hover {
+    color: #cacaca;
+}
+
+@media(max-width: 1000px) {
+    
+}
+
+</style>
+<link href="{% static 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    </head>
+<body>
+    <div class ="position-relative">
+<div class="wrapper"  class=”position-absolute top-100 start-50 translate-middle”>
+    <div class="logo" class="col-sm-4">
+    </div>
+    <div class="text-center mt-4 name">
+        <br>
+        <h4>SummarEase</h4>
+    </div>
+    <form class="p-3 mt-3" method="post">
+        <div class="form-field d-flex align-items-center">
+            <span class="far fa-user"></span>
+            <input type="text" name="userName" id="userName" placeholder="Username">
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <span class="fas fa-key"></span>
+            <input type="password" name="password" id="pwd" placeholder="Password">
+        </div>
+
+        <button class="btn mt-3"> <a href="{% url 'ui:summarease' %}">Login</a></button>
+    </form >
+    <div class="text-center fs-6">
+        <br>
+        <a href="{% url 'ui:forgotpassword' %}">Forget password?</a> or <a href="{% url 'ui:registration' %}">Sign up</a>
+    </div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </body>
 </html>
