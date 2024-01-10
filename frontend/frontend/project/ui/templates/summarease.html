@@ -1,47 +1,4 @@
-<!-- {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text Summarizer</title>
-</head>
-<body>
-    <h1><button>TextSummarizer</button>
-        <button>PdfSummarizer</button></h1>
 
-    <form action="/process-text" method="post">
-        {% csrf_token %}
-        <label for="userInput">Enter Text:</label>
-        <textarea id="userInput" name="user_input" rows="4" cols="50" required></textarea>
-
-        <label for="summarizedOutput">Summarized Output:</label>
-        <textarea id="summarizedOutput" name="summarized_output" rows="4" cols="50" readonly>{{ summarized_output }}</textarea>
-
-        <button type="submit">Summarize</button>
-        
-    </form>
-
-    <button id="microphoneButton">Microphone</button>
-    <button id="translateButton">Translate</button>
-    <form action="welcome" method="post">
-        <button id="logout">logout</button>
-    </form>
-    
-    <script>
-        // Your JavaScript code for microphone and translation buttons
-        document.getElementById('microphoneButton').addEventListener('click', function () {
-            // Add your microphone functionality here
-            alert('Microphone button clicked!');
-        });
-
-        document.getElementById('translateButton').addEventListener('click', function () {
-            // Add your translation functionality here
-            alert('Translate button clicked!');
-        });
-    </script>
-</body>
-</html> -->
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -50,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text Summarizer</title>
     <!-- Add Font Awesome link (make sure to include this in your project) -->
-    <link rel="stylesheet" href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css' %}">
-    <script src="{% static 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js' %}"></script>
-    <script src="{% static 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js' %}"></script>
-    <script src="{% static 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="{% static 'summarease.css' %}">
 </head>
@@ -62,37 +19,49 @@
         
         <header><h3>SummarEase</h3></header>
         <ul>
-        <li ><a href="{% url 'ui:summarease' %}"><i class="fas fa-file-alt icon"></i> Text Summarizer</a></li>
+        <li ><a href="{% url 'ui:summarease' %}"><i class="fas fa-file-alt icon"style="color: rgb(0, 138, 119);"></i> Text Summarizer</a></li>
 
-        <li><a href="{% url 'ui:pdf1' %}"><i class="fas fa-file-pdf icon"></i> PdfSummarizer</a></li>
+        <li><a href="{% url 'ui:pdf1' %}"><i class="fas fa-file-pdf icon"style="color: blue;"></i> PdfSummarizer</a></li>
 
-        <li><a href="{% url 'ui:grammar' %}"><i class="fas fa-code icon"></i> GrammarChecker</a></li>
-        <li><a href="{% url 'ui:profile' %}" ><i class="fas fa-user icon"></i>Profile</a></li>
+        <li><a href="{% url 'ui:grammar' %}"><i class="fas fa-code icon"style="color:green"></i> GrammarChecker</a></li>
+        <li><a href="{% url 'ui:profile' %}" ><i class="fas fa-user icon"></i> Profile</a></li>
 
-        <li></i><a href="{% url 'ui:home' %}" ><i class="fas fa-sign-out-alt icon"></i>Logout</a></li>
+        <li></i><a href="{% url 'ui:home' %}" ><i class="fas fa-sign-out-alt icon" style="color:red"></i> Logout</a></li>
     </ul>
     </div>            
    
 </div>
     <div id="mainButton" onclick="toggleLeftPane()">Main Button</div>
+    
     <div id="mainContent">
+        
         <div class="top">
             <div class="linesContainer">
                 <div >
-                    <p id="minLabel">Short</p>
+                    <!-- <p id="minLabel"> Text Summarizer Short</p> -->
                     
-                    <input type="range" id="lineLengthSlider" name="line_length" value="30" min="10" max="100" step="1" list="lineLengthValues">
-                    <datalist id="lineLengthValues">
+                    <!-- <input type="range" id="lineLengthSlider" name="line_length" value="30" min="10" max="100" step="1" list="lineLengthValues"> -->
+                    <!-- <datalist id="lineLengthValues">
                         <option value="10">
                         <option value="30">
                         <option value="50">
                         <option value="100">
-                    </datalist>
-                    <p id="maxLabel">Long</p>
-                    <div id="but">
+                    </datalist> -->
+                    <!-- <p id="maxLabel">Long</p> -->
+                    <!-- <div id="but">
                         <button id="deletebutton" title="Delete" onclick="deleteOutput()" style="display: none;"><i class="fas fa-trash-alt larger-icon"></i></button>
                       <div class="ico"><button id="microphonebutton" title="Microphone"><i class="fas fa-microphone larger-icon"></i></button>
                         <button id="translatebutton" title="Translate" ><i class="fas fa-language larger-icon"></i></button></div>
+                    </div> -->
+                    <div id="control-panel">
+                        <!-- Clickable icons using Font Awesome -->
+                        <h3 style="color: rgb(8, 113, 113);"> <b>Text Summarizer </b></h3>
+                        <p style="margin-left: 30px;"> Short</p>
+                        <input type="range" min="0" max="100" value="50" id="line-length-slider">
+                        <p>Long</p>
+                        <i class="fas fa-microphone " id="microphonebutton"> </i>
+                        <i class="fas fa-language" id="translatebutton"></i>
+                        <!-- Slider with 2 mid points -->
                     </div>
                 </div>
                 
@@ -122,41 +91,8 @@
         
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $('#summarizeForm').submit(function (event) {
-                event.preventDefault();
-    
-                // Get the user input from the textarea
-                var userInput = $('#inputText').val();
-    
-                // Send an AJAX request to the Django view
-                $.ajax({
-                    url: '{% url "ui:summarease" %}',
-                    method: 'POST',
-                    data: {
-                        csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
-                        user_input: userInput,
-                    },
-                    success: function (data) {
-                        if (data.status === 'success') {
-                            // Display the result in the specified 'div'
-                            $('#output').html('<p>' + data.result + '</p>');
-                        } else {
-                            $('#output').html('<p>Error occurred during summarization.</p>');
-                        }
-                    },
-                    error: function () {
-                        $('#output').html('<p>Error occurred during summarization.</p>');
-                    }
-                });
-            });
-        });
-        function toggleLeftPane() {
-            var leftPane = document.getElementById('leftPane');
-            leftPane.style.left = leftPane.style.left === '0px' ? '-200px' : '0px';
-        }
+        
         function closeNavbar() {
             // Close the navbar when an item is clicked
             $('.navbar-toggle').click();
@@ -198,7 +134,12 @@
             }
         }
     
-              <!-- function processText() {
+            function toggleLeftPane() {
+              const leftPane = document.getElementById('leftPane');
+              leftPane.classList.toggle('hidden');
+            }
+            
+              function processText() {
                 var inputText = document.getElementById('inputText').value;
                 var processedText = '' + inputText.toUpperCase();
                 var outputDiv = document.getElementById('output');
@@ -207,7 +148,7 @@
                 // Show the delete button when there's content in the output
                 var deleteButton = document.getElementById('deletebutton');
                 deleteButton.style.display = outputDiv.innerText.trim() !== '' ? 'inline-block' : 'none';
-              } -->
+              }
           
               function deleteOutput() {
                 var outputDiv = document.getElementById('output');

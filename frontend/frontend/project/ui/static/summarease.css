@@ -127,16 +127,18 @@ body{
 }
 
 
-.sidebar ul A{
+.sidebar ul a{
     /* text-align: center; */
     /* display: block; */
+    display: block;
     height: 100%;
     width: 100%;
-    line-height: 75px;
+    line-height: 85px;
     font-size: 16px;
-    color: rgb(4, 84, 97);
+    color: rgb(2, 60, 68);
     box-sizing: border-box;
     transition: .6s;
+    padding: 1%;
     /* padding: 6%; */
     
     /* border-top: 1px solid #064a698c;
@@ -144,8 +146,11 @@ body{
 }
 
 
-.sidebar li a{
+.sidebar ul li {
     /* display: none; */
+    padding-left: 50px;
+    box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.262);
+    margin-left: -22%;
 }
 /* .sidebar ul{
     flex: 1;
@@ -154,6 +159,10 @@ body{
 /* .hidden {
     flex: 0; 
   } */
+  .sidebar li a{
+    width: 120%;
+    margin-left: -38px;
+}
 ul li:hover a{
     padding-left:9px ;
 }
@@ -173,7 +182,7 @@ ul li:hover a{
     border: 1px solid rgb(255, 255, 255);
     /* background-color: #3da2a972; */
     border-radius: 20px;
-    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5); 
+    box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.5); 
 
     
 }
@@ -183,9 +192,7 @@ ul li:hover a{
     background-color: #f4f7f8;
     padding: 10px;
     border-radius: 15px;
-    box-shadow: 0px 1px 4px 1px rgba(26, 25, 25, 0.160);
-    justify-content: center;
-    align-items: center;
+    box-shadow: 0px 2px 5px 2px rgba(26, 25, 25, 0.360);
     /* display: flex; */
     /* border: 1px solid #0a4b50; */
   }
@@ -195,6 +202,8 @@ ul li:hover a{
     display: flex;
     flex: 1; /* Takes up 2/3 of the available space */
     padding: 20px;
+   /* box-shadow: 0px 1px 4px 1px rgba(26, 25, 25, 0.160); */
+
   }
 
   /* Style for Left Division */
@@ -203,7 +212,9 @@ ul li:hover a{
     background-color: #ffffff;
     padding: 10px;
     margin-left: 10px;
-    margin-right: 1px;
+    margin-right: 10px;
+    width: 180%;
+    /* background-color: #28bc9e00; */
     /*transition: flex 0.5s;  Smooth transition for width change */
   }
 
@@ -213,11 +224,12 @@ ul li:hover a{
     background-color: #ffffff;
     padding: 10px;
     box-shadow: 0px 2px 6px 2px rgba(94, 131, 131, 0.515);
-    margin-top: 1%;
-    margin-bottom: 5%;
+    margin-top: 2%;
+    margin-bottom: 4.5%;
     border-radius: 5px;
-    margin-right:10px;
-    margin-left:10px;
+    margin-right:22px;
+    margin-left: 23%;
+    
   }
 /* .box {
     background-color: #fbeded;
@@ -289,13 +301,15 @@ button[type="submit"]:hover {
 
 #microphonebutton,#translatebutton{
     
-   color: #044d46;
-    border: 1px solid  #fdfdfd;
+    color: #064c51c1;
+    background-color:  #f4f7f8;
+    border: 1px solid  #f4f7f8;
     /* padding: 3%; */
     float: right;
     display: flex;
-    margin-left: 1px;
+    margin-left: 20px;
     margin-right: 4px;
+    font-size: 25px;
 }
 
 .ico{
@@ -305,7 +319,7 @@ button[type="submit"]:hover {
     display: none;
     cursor: pointer;
     color: #022628;
-    /* background-color:  #0f5369; */
+    background-color:  #f4f7f8;
     border: 1px solid  #f4f7f8;
     /* padding: 3%; */
     float: right;
@@ -325,6 +339,19 @@ button[type="submit"]:hover {
     /* color: #022628; */
     
 }
+#control-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Style for icons */
+#control-panel i {
+    font-size: 24px; /* Adjust the size as needed */
+    margin: 0 10px; /* Adjust the spacing between icons */
+    cursor: pointer;
+}
+
 
 .larger-icon{
     font-size: 170%;

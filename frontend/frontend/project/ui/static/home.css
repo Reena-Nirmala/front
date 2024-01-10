@@ -78,7 +78,7 @@ h4 {
 .navbar-nav li a:hover,
 .navbar-nav li.active a {
   color: #000000 !important;
-  background-color: #d2dee0 !important; 
+  /* background-color: #d2dee0 !important;  */
 }
 
 .navbar-default .navbar-toggle {
